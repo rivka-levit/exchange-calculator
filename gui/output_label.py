@@ -2,9 +2,9 @@
 Output label for converted amount.
 """
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QLabel
+from PyQt6.QtCore import Qt, QPoint, QPointF
+from PyQt6.QtGui import QFont, QColor
+from PyQt6.QtWidgets import QLabel, QGraphicsDropShadowEffect
 
 
 class ConvertedAmount(QLabel):
@@ -26,3 +26,7 @@ class ConvertedAmount(QLabel):
             f'border-radius: 5px;'
             f'padding: 5px;'
         )
+        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 2)),
+                                           blurRadius=10,
+                                           color=QColor('#505050'))
+        self.setGraphicsEffect(effect)
