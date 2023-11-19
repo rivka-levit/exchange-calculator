@@ -3,7 +3,7 @@ Buttons for the main window.
 """
 
 from PyQt6.QtCore import QPoint, QPointF
-from PyQt6.QtGui import QFont, QColor
+from PyQt6.QtGui import QFont, QColor, QIcon
 from PyQt6.QtWidgets import QPushButton, QGraphicsDropShadowEffect
 
 
@@ -16,6 +16,8 @@ class ConvertButton(QPushButton):
         self.set_ui()
 
     def set_ui(self):
+        """Set user interface."""
+
         self.setText('Convert')
         self.setMinimumWidth(108)
         self.setFixedHeight(35)
@@ -39,3 +41,37 @@ class ConvertButton(QPushButton):
                                            blurRadius=5,
                                            color=QColor('#545f72'))
         self.setGraphicsEffect(effect)
+
+
+class ListButton(QPushButton):
+    """Button for the list of currencies."""
+
+    def __init__(self):
+        super().__init__()
+        self.set_ui()
+
+    def set_ui(self):
+        """Set user interface."""
+        self.setIcon(QIcon('assets/list.png'))
+        self.setMinimumWidth(35)
+        self.setFixedHeight(35)
+        self.setStyleSheet(
+            """
+                QPushButton {
+                    background-color: #d7d5d4;
+                    border-radius: 5px;
+                }
+                QPushButton:hover {
+                    background-color: #c8c3c0;
+                }
+                QPushButton:pressed {
+                    background-color: #c0b7b4;
+                }
+            """
+        )
+
+        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 2)),
+                                           blurRadius=5,
+                                           color=QColor('#545f72'))
+        self.setGraphicsEffect(effect)
+

@@ -17,7 +17,7 @@ from calculs.extractors import RateExtractor
 from gui.choice_boxes import ChoiceBox
 from gui.input_field import AmountInput
 from gui.output_label import ConvertedAmount
-from gui.buttons import ConvertButton
+from gui.buttons import ConvertButton, ListButton
 from gui.fonts import CustomFonts
 
 
@@ -84,9 +84,13 @@ class MainWindow(QMainWindow):
         """Set layout for buttons."""
 
         bottom_layout = QHBoxLayout()
-        btn = ConvertButton(fonts=self.fonts)
-        bottom_layout.addWidget(btn, alignment=Qt.AlignmentFlag.AlignHCenter)
-        btn.clicked.connect(self.slot)
+
+        list_btn = ListButton()
+        bottom_layout.addWidget(list_btn, stretch=1)
+
+        convert_btn = ConvertButton(fonts=self.fonts)
+        bottom_layout.addWidget(convert_btn, stretch=7, alignment=Qt.AlignmentFlag.AlignHCenter)
+        convert_btn.clicked.connect(self.slot)
 
         bottom_layout.setContentsMargins(0, 10, 0, 0)
 
