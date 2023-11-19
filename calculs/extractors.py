@@ -50,4 +50,5 @@ class RateExtractor:
 # if __name__ == '__main__':
 #     exr = RateExtractor()
 #     print(exr.get_rate('USD', 'ILS'))
+#     print(exr.get_currencies().keys())
 
