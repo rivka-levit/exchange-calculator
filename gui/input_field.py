@@ -10,8 +10,9 @@ from PyQt6.QtWidgets import QLineEdit, QGraphicsDropShadowEffect
 class AmountInput(QLineEdit):
     """Amount input field."""
 
-    def __init__(self):
+    def __init__(self, slot=None):
         super().__init__()
+        self.slot = slot
         self.set_ui()
 
     def set_ui(self):
@@ -31,4 +32,11 @@ class AmountInput(QLineEdit):
                                            color=QColor('#545f72'))
         self.setGraphicsEffect(effect)
 
+    def keyPressEvent(self, event):
+        """Handle Enter key pressed in the input field."""
+
+        if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
+            self.slot()
+        else:
+            super().keyPressEvent(event)
 

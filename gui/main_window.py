@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
         self.fonts = CustomFonts()
         self.from_box = ChoiceBox(self.currencies.keys(), fonts=self.fonts)
         self.to_box = ChoiceBox(self.currencies.keys(), fonts=self.fonts)
-        self.amount = AmountInput()
+        self.amount = AmountInput(slot=self.slot)
         self.converted_amount = ConvertedAmount()
         self.set_ui()
 
@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
         """Set user interface."""
 
         self.setWindowIcon(QIcon('assets/icon.ico'))
-        self.setWindowTitle('Exchange Converter')
+        self.setWindowTitle('Converter')
         self.setStyleSheet('background-color: #f2f2f2;')
         self.setGeometry(0, 0, 150, 260)
         self.center_window()
@@ -72,7 +72,7 @@ class MainWindow(QMainWindow):
         choice_layout.addWidget(self.from_box, stretch=2)
 
         img_label = QLabel()
-        pixmap = QPixmap('assets/arrow4.png')
+        pixmap = QPixmap('assets/arrow.png')
         img_label.setPixmap(pixmap)
         choice_layout.addWidget(img_label, stretch=1)
 
