@@ -16,6 +16,7 @@ from calculs.calculations import CurrencyConverter
 from calculs.extractors import RateExtractor
 from gui.choice_boxes import ChoiceBox
 from gui.input_field import AmountInput
+from gui.output_label import ConvertedAmount
 
 
 class MainWindow(QMainWindow):
@@ -26,6 +27,7 @@ class MainWindow(QMainWindow):
         self.converter = CurrencyConverter()
         self.currencies = RateExtractor().get_currencies()
         self.amount = AmountInput()
+        self.converted_amount = ConvertedAmount()
         self.set_ui()
 
     def set_ui(self):
@@ -47,6 +49,7 @@ class MainWindow(QMainWindow):
         main_layout.setSpacing(10)
         main_layout.addLayout(self.set_choice_layout())
         main_layout.addWidget(self.amount)
+        main_layout.addWidget(self.converted_amount)
 
         return main_layout
 
