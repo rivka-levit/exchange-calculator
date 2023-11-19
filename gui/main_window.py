@@ -38,13 +38,13 @@ class MainWindow(QMainWindow):
 
         self.setWindowIcon(QIcon('assets/icon.ico'))
         self.setWindowTitle('Exchange Converter')
-        self.setStyleSheet('background-color: #fcf4de;')
-        self.setGeometry(0, 0, 240, 260)
+        self.setStyleSheet('background-color: #f2f2f2;')
+        self.setGeometry(0, 0, 150, 260)
         self.center_window()
 
         central_widget = QWidget()
         central_widget.setLayout(self.set_main_layout())
-        central_widget.setContentsMargins(20, 20, 20, 20)
+        central_widget.setContentsMargins(15, 15, 15, 15)
         self.setCentralWidget(central_widget)
 
     def set_main_layout(self):
@@ -64,19 +64,20 @@ class MainWindow(QMainWindow):
         """Set nested layout with boxes to select currencies."""
 
         choice_layout = QHBoxLayout()
+        choice_layout.setSpacing(10)
 
         self.from_box.setCurrentText('USD')
         choice_layout.addWidget(self.from_box, stretch=2)
 
         img_label = QLabel()
-        pixmap = QPixmap('assets/arrow.png')
+        pixmap = QPixmap('assets/arrow3.png')
         img_label.setPixmap(pixmap)
         choice_layout.addWidget(img_label, stretch=1)
 
         self.to_box.setCurrentText('ILS')
         choice_layout.addWidget(self.to_box, stretch=2)
 
-        choice_layout.setContentsMargins(0, 0, 0, 15)
+        choice_layout.setContentsMargins(0, 0, 0, 10)
 
         return choice_layout
 

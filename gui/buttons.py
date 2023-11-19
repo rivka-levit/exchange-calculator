@@ -17,24 +17,24 @@ class ConvertButton(QPushButton):
     def set_ui(self):
         self.setText('Convert')
         self.setMinimumWidth(120)
-        self.setFixedHeight(30)
+        self.setFixedHeight(35)
         self.setFont(QFont('Helvetica', 16, weight=900))
         self.setStyleSheet(
             """
                 QPushButton {
-                    background-color: #ff9d9c;
-                    color: #ffffff;
+                    background-color: #545f71;
+                    color: #f2f2f2;
                     border-radius: 5px;
                 }
                 QPushButton:hover {
-                    background-color: #fba8a7;
+                    background-color: #855751;
                 }
                 QPushButton:pressed {
-                    background-color: #e98584;
+                    background-color: #74433e;
                 }
             """
         )
         effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 2)),
                                            blurRadius=5,
-                                           color=QColor('#505050'))
+                                           color=QColor('#545f72'))
         self.setGraphicsEffect(effect)
