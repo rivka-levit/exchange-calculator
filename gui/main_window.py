@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import (
 from calculs.calculations import CurrencyConverter
 from calculs.extractors import RateExtractor
 from gui.choice_boxes import ChoiceBox
+from gui.input_field import AmountInput
 
 
 class MainWindow(QMainWindow):
@@ -24,6 +25,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.converter = CurrencyConverter()
         self.currencies = RateExtractor().get_currencies()
+        self.amount = AmountInput()
         self.set_ui()
 
     def set_ui(self):
@@ -44,6 +46,7 @@ class MainWindow(QMainWindow):
         main_layout = QVBoxLayout()
         main_layout.setSpacing(10)
         main_layout.addLayout(self.set_choice_layout())
+        main_layout.addWidget(self.amount)
 
         return main_layout
 

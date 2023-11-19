@@ -2,7 +2,6 @@
 Choice currencies box.
 """
 
-from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QComboBox
 
@@ -17,7 +16,7 @@ class ChoiceBox(QComboBox):
 
     def set_ui(self):
         self.setMinimumWidth(100)
-        self.setMinimumHeight(20)
+        self.setFixedHeight(40)
         self.setFont(QFont('Helvetica', 12, weight=600))
         self.addItems(self.currencies)
         self.setStyleSheet(
