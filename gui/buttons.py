@@ -2,8 +2,9 @@
 Buttons for the main window.
 """
 
-from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtCore import QPoint, QPointF
+from PyQt6.QtGui import QFont, QColor
+from PyQt6.QtWidgets import QPushButton, QGraphicsDropShadowEffect
 
 
 class ConvertButton(QPushButton):
@@ -16,7 +17,7 @@ class ConvertButton(QPushButton):
     def set_ui(self):
         self.setText('Convert')
         self.setMinimumWidth(120)
-        self.setFixedHeight(40)
+        self.setFixedHeight(30)
         self.setFont(QFont('Helvetica', 16, weight=900))
         self.setStyleSheet(
             """
@@ -33,3 +34,7 @@ class ConvertButton(QPushButton):
                 }
             """
         )
+        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 2)),
+                                           blurRadius=5,
+                                           color=QColor('#505050'))
+        self.setGraphicsEffect(effect)

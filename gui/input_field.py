@@ -23,12 +23,10 @@ class AmountInput(QLineEdit):
             f'qproperty-alignment: {Qt.AlignmentFlag.AlignCenter};'
             f'color: #505050;'
             f'background-color: #ffffff;'
-            # f'border: 2px solid #ff9d9c;'
             f'border-radius: 5px;'
             f'padding: 5px;'
-            f'box-shadow: gray 0px 0px 5px -5px;'
         )
-        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 2)),
+        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 1)),
                                            blurRadius=10,
                                            color=QColor('#505050'))
         self.setGraphicsEffect(effect)

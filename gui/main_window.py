@@ -27,6 +27,8 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.converter = CurrencyConverter()
         self.currencies = RateExtractor().get_currencies()
+        self.from_box = ChoiceBox(self.currencies.keys())
+        self.to_box = ChoiceBox(self.currencies.keys())
         self.amount = AmountInput()
         self.converted_amount = ConvertedAmount()
         self.set_ui()
@@ -47,13 +49,14 @@ class MainWindow(QMainWindow):
 
     def set_main_layout(self):
         main_layout = QVBoxLayout()
-        main_layout.setSpacing(15)
+        main_layout.setSpacing(20)
         main_layout.addLayout(self.set_choice_layout())
         main_layout.addWidget(self.amount)
         main_layout.addWidget(self.converted_amount)
 
         btn = ConvertButton()
         main_layout.addWidget(btn, alignment=Qt.AlignmentFlag.AlignHCenter)
+        btn.clicked.connect(self.slot)
 
         return main_layout
 
@@ -62,20 +65,42 @@ class MainWindow(QMainWindow):
 
         choice_layout = QHBoxLayout()
 
-        from_box = ChoiceBox(self.currencies.keys())
-        from_box.setCurrentText('USD')
-        choice_layout.addWidget(from_box, stretch=2)
+        self.from_box.setCurrentText('USD')
+        choice_layout.addWidget(self.from_box, stretch=2)
 
         img_label = QLabel()
         pixmap = QPixmap('assets/arrow.png')
         img_label.setPixmap(pixmap)
         choice_layout.addWidget(img_label, stretch=1)
 
-        to_box = ChoiceBox(self.currencies.keys())
-        to_box.setCurrentText('ILS')
-        choice_layout.addWidget(to_box, stretch=2)
+        self.to_box.setCurrentText('ILS')
+        choice_layout.addWidget(self.to_box, stretch=2)
+
+        choice_layout.setContentsMargins(0, 0, 0, 15)
 
         return choice_layout
+
+    def slot(self):
+        from_cur = self.from_box.currentText()
+        to_cur = self.to_box.currentText()
+        amount = self.amount.text()
+
+        if self.valid_input(amount):
+            self.converted_amount.setText(
+                str(self.converter.convert(from_cur, to_cur, float(amount)))
+            )
+        else:
+            self.converted_amount.setText('Invalid input!')
+
+    @staticmethod
+    def valid_input(value: str) -> bool:
+        """Validate amount input."""
+
+        try:
+            float(value)
+            return True
+        except ValueError:
+            return False
 
     def center_window(self):
         """Open main window always in the center."""

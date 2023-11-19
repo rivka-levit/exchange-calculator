@@ -26,7 +26,7 @@ class ConvertedAmount(QLabel):
             f'border-radius: 5px;'
             f'padding: 5px;'
         )
-        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 2)),
+        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 1)),
                                            blurRadius=10,
                                            color=QColor('#505050'))
         self.setGraphicsEffect(effect)
