@@ -55,10 +55,7 @@ class MainWindow(QMainWindow):
         main_layout.addLayout(self.set_choice_layout())
         main_layout.addWidget(self.amount)
         main_layout.addWidget(self.converted_amount)
-
-        btn = ConvertButton(fonts=self.fonts)
-        main_layout.addWidget(btn, alignment=Qt.AlignmentFlag.AlignHCenter)
-        btn.clicked.connect(self.slot)
+        main_layout.addLayout(self.set_bottom_layout())
 
         return main_layout
 
@@ -82,6 +79,18 @@ class MainWindow(QMainWindow):
         choice_layout.setContentsMargins(0, 0, 0, 10)
 
         return choice_layout
+
+    def set_bottom_layout(self):
+        """Set layout for buttons."""
+
+        bottom_layout = QHBoxLayout()
+        btn = ConvertButton(fonts=self.fonts)
+        bottom_layout.addWidget(btn, alignment=Qt.AlignmentFlag.AlignHCenter)
+        btn.clicked.connect(self.slot)
+
+        bottom_layout.setContentsMargins(0, 10, 0, 0)
+
+        return bottom_layout
 
     def slot(self):
         from_cur = self.from_box.currentText()
