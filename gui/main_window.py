@@ -18,6 +18,7 @@ from gui.choice_boxes import ChoiceBox
 from gui.input_field import AmountInput
 from gui.output_label import ConvertedAmount
 from gui.buttons import ConvertButton
+from gui.fonts import CustomFonts
 
 
 class MainWindow(QMainWindow):
@@ -27,8 +28,9 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.converter = CurrencyConverter()
         self.currencies = RateExtractor().get_currencies()
-        self.from_box = ChoiceBox(self.currencies.keys())
-        self.to_box = ChoiceBox(self.currencies.keys())
+        self.fonts = CustomFonts()
+        self.from_box = ChoiceBox(self.currencies.keys(), fonts=self.fonts)
+        self.to_box = ChoiceBox(self.currencies.keys(), fonts=self.fonts)
         self.amount = AmountInput()
         self.converted_amount = ConvertedAmount()
         self.set_ui()
@@ -54,7 +56,7 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.amount)
         main_layout.addWidget(self.converted_amount)
 
-        btn = ConvertButton()
+        btn = ConvertButton(fonts=self.fonts)
         main_layout.addWidget(btn, alignment=Qt.AlignmentFlag.AlignHCenter)
         btn.clicked.connect(self.slot)
 
@@ -70,7 +72,7 @@ class MainWindow(QMainWindow):
         choice_layout.addWidget(self.from_box, stretch=2)
 
         img_label = QLabel()
-        pixmap = QPixmap('assets/arrow3.png')
+        pixmap = QPixmap('assets/arrow4.png')
         img_label.setPixmap(pixmap)
         choice_layout.addWidget(img_label, stretch=1)
 

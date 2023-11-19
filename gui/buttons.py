@@ -10,15 +10,16 @@ from PyQt6.QtWidgets import QPushButton, QGraphicsDropShadowEffect
 class ConvertButton(QPushButton):
     """The Convert button."""
 
-    def __init__(self):
+    def __init__(self, fonts=None):
         super().__init__()
+        self.fonts = fonts
         self.set_ui()
 
     def set_ui(self):
         self.setText('Convert')
-        self.setMinimumWidth(120)
+        self.setMinimumWidth(108)
         self.setFixedHeight(35)
-        self.setFont(QFont('Helvetica', 16, weight=900))
+        self.setFont(QFont(self.fonts.gentium_bold, 18, weight=900))
         self.setStyleSheet(
             """
                 QPushButton {
