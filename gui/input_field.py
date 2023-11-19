@@ -18,6 +18,7 @@ class AmountInput(QLineEdit):
         self.setMinimumWidth(200)
         self.setFixedHeight(40)
         self.setFont(QFont('Helvetica', 12, weight=600))
+        self.setPlaceholderText('Enter amount...')
         self.setStyleSheet(
             f'qproperty-alignment: {Qt.AlignmentFlag.AlignCenter};'
             f'color: #505050;'

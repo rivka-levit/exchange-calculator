@@ -17,6 +17,7 @@ from calculs.extractors import RateExtractor
 from gui.choice_boxes import ChoiceBox
 from gui.input_field import AmountInput
 from gui.output_label import ConvertedAmount
+from gui.buttons import ConvertButton
 
 
 class MainWindow(QMainWindow):
@@ -41,15 +42,18 @@ class MainWindow(QMainWindow):
 
         central_widget = QWidget()
         central_widget.setLayout(self.set_main_layout())
-        central_widget.setContentsMargins(20, 0, 20, 20)
+        central_widget.setContentsMargins(20, 20, 20, 20)
         self.setCentralWidget(central_widget)
 
     def set_main_layout(self):
         main_layout = QVBoxLayout()
-        main_layout.setSpacing(10)
+        main_layout.setSpacing(15)
         main_layout.addLayout(self.set_choice_layout())
         main_layout.addWidget(self.amount)
         main_layout.addWidget(self.converted_amount)
+
+        btn = ConvertButton()
+        main_layout.addWidget(btn, alignment=Qt.AlignmentFlag.AlignHCenter)
 
         return main_layout
 
