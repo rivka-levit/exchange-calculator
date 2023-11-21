@@ -3,8 +3,9 @@ Main window of the app.
 """
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtGui import QIcon, QPixmap, QCloseEvent
 from PyQt6.QtWidgets import (
+    QApplication,
     QMainWindow,
     QWidget,
     QVBoxLayout,
@@ -109,6 +110,18 @@ class MainWindow(QMainWindow):
         else:
             warning = InvalidInputMessage(parent=self)
             warning.exec()
+
+    @staticmethod
+    def close_all_windows():
+        """On closing the main window, close all the windows."""
+
+        all_windows = QApplication.allWindows()
+        for w in all_windows:
+            w.close()
+
+    def closeEvent(self, event: QCloseEvent):
+        event.accept()
+        self.close_all_windows()
 
     @staticmethod
     def valid_input(value: str) -> bool:
