@@ -20,7 +20,7 @@ from gui.input_field import AmountInput
 from gui.output_label import ConvertedAmount
 from gui.buttons import ConvertButton, ListButton
 from gui.fonts import CustomFonts
-from gui.messages import InvalidInputMessage
+from gui.messages import InvalidInputMessage, ConnectionErrorMessage
 
 
 class MainWindow(QMainWindow):
@@ -28,8 +28,12 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        try:
+            self.currencies = RateExtractor().get_currencies()
+        except Exception:
+            err_message = ConnectionErrorMessage(parent=self)
+            err_message.exec()
         self.converter = CurrencyConverter()
-        self.currencies = RateExtractor().get_currencies()
         self.fonts = CustomFonts()
         self.from_box = ChoiceBox(self.currencies.keys(), fonts=self.fonts)
         self.to_box = ChoiceBox(self.currencies.keys(), fonts=self.fonts)
@@ -104,9 +108,13 @@ class MainWindow(QMainWindow):
         amount = self.amount.text()
 
         if self.valid_input(amount):
-            self.converted_amount.setText(
-                str(self.converter.convert(from_cur, to_cur, float(amount)))
-            )
+            try:
+                self.converted_amount.setText(
+                    str(self.converter.convert(from_cur, to_cur, float(amount)))
+                )
+            except Exception:
+                err_message = ConnectionErrorMessage(parent=self)
+                err_message.exec()
         else:
             warning = InvalidInputMessage(parent=self)
             warning.exec()
