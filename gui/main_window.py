@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
 
         bottom_layout = QHBoxLayout()
 
-        list_btn = ListButton()
+        list_btn = ListButton(currencies=self.currencies)
         bottom_layout.addWidget(list_btn, stretch=1)
 
         convert_btn = ConvertButton(fonts=self.fonts)
