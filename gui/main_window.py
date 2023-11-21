@@ -19,6 +19,7 @@ from gui.input_field import AmountInput
 from gui.output_label import ConvertedAmount
 from gui.buttons import ConvertButton, ListButton
 from gui.fonts import CustomFonts
+from gui.messages import InvalidInputMessage
 
 
 class MainWindow(QMainWindow):
@@ -106,7 +107,8 @@ class MainWindow(QMainWindow):
                 str(self.converter.convert(from_cur, to_cur, float(amount)))
             )
         else:
-            self.converted_amount.setText('Invalid input!')
+            warning = InvalidInputMessage(parent=self)
+            warning.exec()
 
     @staticmethod
     def valid_input(value: str) -> bool:
