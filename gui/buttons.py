@@ -48,10 +48,12 @@ class ConvertButton(QPushButton):
 class ListButton(QPushButton):
     """Button for the list of currencies."""
 
-    def __init__(self, currencies=None):
+    def __init__(self, currencies=None, fonts=None):
         super().__init__()
         self.currencies = currencies
+        self.fonts = fonts
         self.set_ui()
+        self.list_window = None
         self.clicked.connect(self.slot)
 
     def set_ui(self):
@@ -80,6 +82,8 @@ class ListButton(QPushButton):
         self.setGraphicsEffect(effect)
 
     def slot(self):
-        self.list_window = ListWindow(currencies=self.currencies)
+        if self.list_window is None:
+            self.list_window = ListWindow(currencies=self.currencies,
+                                          fonts=self.fonts)
         self.list_window.show()
 

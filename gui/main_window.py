@@ -3,7 +3,7 @@ Main window of the app.
 """
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon, QFont, QPixmap
+from PyQt6.QtGui import QIcon, QPixmap
 from PyQt6.QtWidgets import (
     QMainWindow,
     QWidget,
@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
 
         bottom_layout = QHBoxLayout()
 
-        list_btn = ListButton(currencies=self.currencies)
+        list_btn = ListButton(currencies=self.currencies, fonts=self.fonts)
         bottom_layout.addWidget(list_btn, stretch=1)
 
         convert_btn = ConvertButton(fonts=self.fonts)
