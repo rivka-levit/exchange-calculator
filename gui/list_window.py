@@ -21,7 +21,7 @@ class ListWindow(QWidget):
 
     def set_ui(self):
         self.setWindowIcon(QIcon('assets/icon.ico'))
-        self.setWindowTitle('All Currencies')
+        self.setWindowTitle('Currencies')
         self.setGeometry(0, 0, 400, 500)
         self.setStyleSheet('background-color: #f2f2f2;')
 
