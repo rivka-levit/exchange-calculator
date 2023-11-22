@@ -21,6 +21,7 @@ from gui.output_label import ConvertedAmount
 from gui.buttons import ConvertButton, ListButton
 from gui.fonts import CustomFonts
 from gui.messages import InvalidInputMessage, ConnectionErrorMessage
+from gui.list_window import ListWindow
 
 
 class MainWindow(QMainWindow):
@@ -39,6 +40,7 @@ class MainWindow(QMainWindow):
         self.to_box = ChoiceBox(self.currencies.keys(), fonts=self.fonts)
         self.amount = AmountInput(slot=self.slot)
         self.converted_amount = ConvertedAmount()
+        self.list_window = None
         self.set_ui()
 
     def set_ui(self):
@@ -93,6 +95,7 @@ class MainWindow(QMainWindow):
 
         list_btn = ListButton(currencies=self.currencies, fonts=self.fonts)
         bottom_layout.addWidget(list_btn, stretch=1)
+        list_btn.clicked.connect(self.show_currencies)
 
         convert_btn = ConvertButton(fonts=self.fonts)
         bottom_layout.addWidget(convert_btn, stretch=7, alignment=Qt.AlignmentFlag.AlignHCenter)
@@ -118,6 +121,23 @@ class MainWindow(QMainWindow):
         else:
             warning = InvalidInputMessage(parent=self)
             warning.exec()
+
+    def show_currencies(self):
+        """Show additional window with list of currencies."""
+
+        if self.list_window is None:
+            self.list_window = ListWindow(currencies=self.currencies,
+                                          fonts=self.fonts)
+            self.set_list_window_position()
+        self.list_window.show()
+
+    def set_list_window_position(self):
+        """Set geometry for list currencies window."""
+
+        rt = self.list_window.geometry()
+        bl = self.geometry().bottomLeft()
+        rt.moveBottomRight(bl)
+        self.list_window.move(rt.topLeft())
 
     @staticmethod
     def close_all_windows():

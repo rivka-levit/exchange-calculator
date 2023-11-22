@@ -53,8 +53,6 @@ class ListButton(QPushButton):
         self.currencies = currencies
         self.fonts = fonts
         self.set_ui()
-        self.list_window = None
-        self.clicked.connect(self.slot)
 
     def set_ui(self):
         """Set user interface."""
@@ -80,10 +78,3 @@ class ListButton(QPushButton):
                                            blurRadius=5,
                                            color=QColor('#545f72'))
         self.setGraphicsEffect(effect)
-
-    def slot(self):
-        if self.list_window is None:
-            self.list_window = ListWindow(currencies=self.currencies,
-                                          fonts=self.fonts)
-        self.list_window.show()
-

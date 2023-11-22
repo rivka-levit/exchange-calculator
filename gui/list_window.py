@@ -16,7 +16,6 @@ class ListWindow(QWidget):
         self.fonts = fonts
         self.currencies = currencies
         self.list_label = QLabel('')
-        self.center_window()
         self.set_ui()
 
     def set_ui(self):
@@ -41,11 +40,3 @@ class ListWindow(QWidget):
             output += f'{ticker} - {descr}\n'
         self.list_label.setText(output)
         self.list_label.setFont(QFont(self.fonts.gentium_bold, 12))
-
-    def center_window(self):
-        """Open the window always in the center."""
-
-        qt_rectangle = self.frameGeometry()
-        center_point = self.screen().availableGeometry().center()
-        qt_rectangle.moveCenter(center_point)
-        self.move(qt_rectangle.topLeft())
