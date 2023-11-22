@@ -2,6 +2,7 @@
 Window with list of all available currencies.
 """
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout
 
@@ -26,6 +27,22 @@ class ListWindow(QWidget):
 
         layout = QVBoxLayout()
         scroll_box = ScrollCurrencies()
+        scroll_box.setStyleSheet(
+            """
+                QScrollArea {
+                    border: 1px solid #4e5f73;
+                    border-radius: 5px;
+                    padding: 3px 0 0 10px;
+                }
+            """
+        )
+
+        title = QLabel('Available Currencies')
+        title.setFont(QFont(self.fonts.gentium_bold, 16, weight=900))
+        title.setStyleSheet('color: #8c4b45;')
+        title.setContentsMargins(0, 3, 0, 5)
+        layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignHCenter)
+
         self.set_currencies_output()
         scroll_box.setWidget(self.list_label)
         layout.addWidget(scroll_box)
@@ -39,4 +56,4 @@ class ListWindow(QWidget):
         for ticker, descr in self.currencies.items():
             output += f'{ticker} - {descr}\n'
         self.list_label.setText(output)
-        self.list_label.setFont(QFont(self.fonts.gentium_bold, 12))
+        self.list_label.setFont(QFont('Helvetica', 12, weight=400))
