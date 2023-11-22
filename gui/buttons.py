@@ -32,10 +32,10 @@ class ConvertButton(QPushButton):
                     border-radius: 5px;
                 }
                 QPushButton:hover {
-                    background-color: #855751;
+                    background-color: #8c4b45;
                 }
                 QPushButton:pressed {
-                    background-color: #74433e;
+                    background-color: #80423d;
                 }
             """
         )
