@@ -110,7 +110,10 @@ class MainWindow(QMainWindow):
         to_cur = self.to_box.currentText()
         amount = self.amount.text()
 
-        if self.valid_input(amount):
+        if not amount:
+            self.converted_amount.setText('')
+
+        elif self.valid_input(amount):
             try:
                 self.converted_amount.setText(
                     str(self.converter.convert(from_cur, to_cur, float(amount)))
