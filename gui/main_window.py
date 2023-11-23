@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
     QLabel
 )
+from requests.exceptions import ConnectionError
 
 from calculs.calculations import CurrencyConverter
 from calculs.extractors import RateExtractor
@@ -31,8 +32,13 @@ class MainWindow(QMainWindow):
         super().__init__()
         try:
             self.currencies = RateExtractor().get_currencies()
-        except Exception:
-            err_message = ConnectionErrorMessage(parent=self)
+        except ConnectionError:
+            msg = ('Internet connection failed!\nPlease check it '
+                   'and try again.')
+            err_message = ConnectionErrorMessage(msg, parent=self)
+            err_message.exec()
+        except Exception as e:
+            err_message = ConnectionErrorMessage(str(e), parent=self)
             err_message.exec()
         self.converter = CurrencyConverter()
         self.fonts = CustomFonts()
@@ -118,8 +124,13 @@ class MainWindow(QMainWindow):
                 self.converted_amount.setText(
                     str(self.converter.convert(from_cur, to_cur, float(amount)))
                 )
-            except Exception:
-                err_message = ConnectionErrorMessage(parent=self)
+            except ConnectionError:
+                msg = ('Internet connection failed!\nPlease check it '
+                       'and try again.')
+                err_message = ConnectionErrorMessage(msg, parent=self)
+                err_message.exec()
+            except Exception as e:
+                err_message = ConnectionErrorMessage(str(e), parent=self)
                 err_message.exec()
         else:
             warning = InvalidInputMessage(parent=self)
