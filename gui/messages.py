@@ -22,6 +22,7 @@ class InvalidInputMessage(BaseMessage):
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
+        self.setWindowIcon(QIcon('assets/icon.ico'))
         self.setWindowTitle("Invalid input!")
         self.setText("You must provide a number!")
         self.setIcon(QMessageBox.Icon.Warning)

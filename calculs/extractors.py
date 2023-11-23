@@ -35,7 +35,7 @@ class RateExtractor:
     def get_currencies(self):
         """Return list of available currencies."""
 
-        params = {'access_key': os.environ.get('API_KEY')}
+        params = {'access_key': self.api_key}
         r = requests.get(f'{self.base_url}list', params=params)
 
         return r.json()['currencies']
@@ -45,10 +45,3 @@ class RateExtractor:
         """Convert the rate to rounded float number."""
 
         return round(float(data), 2)
-
-
-# if __name__ == '__main__':
-#     exr = RateExtractor()
-#     print(exr.get_rate('USD', 'ILS'))
-#     print(exr.get_currencies().keys())
-
