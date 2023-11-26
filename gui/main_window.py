@@ -14,7 +14,7 @@ from PyQt6.QtWidgets import (
 from requests.exceptions import ConnectionError
 
 from calculs.calculations import CurrencyConverter
-from calculs.extractors import RateExtractor
+from calculs.extractors import RateScrapeExtractor
 from gui.choice_boxes import ChoiceBox
 from gui.input_field import AmountInput
 from gui.output_label import ConvertedAmount
@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         try:
-            self.currencies = RateExtractor().get_currencies()
+            self.currencies = RateScrapeExtractor().get_currencies()
         except ConnectionError:
             msg = ('Internet connection failed!\nPlease check it '
                    'and try again.')
@@ -51,7 +51,7 @@ class MainWindow(QMainWindow):
     def set_ui(self):
         """Set user interface."""
 
-        self.setWindowIcon(QIcon('assets/icon.ico'))
+        self.setWindowIcon(QIcon('_internal/assets/icon.ico'))
         self.setWindowTitle('Converter')
         self.setStyleSheet('background-color: #f2f2f2;')
         self.setGeometry(0, 0, 150, 260)
@@ -102,7 +102,8 @@ class MainWindow(QMainWindow):
         list_btn.clicked.connect(self.show_currencies)
 
         convert_btn = ConvertButton(fonts=self.fonts)
-        bottom_layout.addWidget(convert_btn, stretch=7, alignment=Qt.AlignmentFlag.AlignHCenter)
+        bottom_layout.addWidget(convert_btn, stretch=7,
+                                alignment=Qt.AlignmentFlag.AlignHCenter)
         convert_btn.clicked.connect(self.slot)
 
         bottom_layout.setContentsMargins(0, 10, 0, 0)

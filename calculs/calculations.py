@@ -2,14 +2,14 @@
 Calculator for currency exchange.
 """
 
-from calculs.extractors import RateExtractor
+from calculs.extractors import RateScrapeExtractor
 
 
 class CurrencyConverter:
     """Calculate the sum in target currency."""
 
     def __init__(self):
-        self.extractor = RateExtractor()
+        self.extractor = RateScrapeExtractor()
 
     def convert(self, from_cur: str, to_cur: str, value: float) -> float:
         """Convert the sum to the target currency."""

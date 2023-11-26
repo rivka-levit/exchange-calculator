@@ -57,7 +57,7 @@ class ListButton(QPushButton):
     def set_ui(self):
         """Set user interface."""
 
-        self.setIcon(QIcon('assets/list.png'))
+        self.setIcon(QIcon('_internal/assets/list.png'))
         self.setFixedWidth(35)
         self.setFixedHeight(35)
         self.setStyleSheet(
@@ -91,7 +91,7 @@ class ReverseButton(QPushButton):
     def set_ui(self):
         """Set user interface."""
 
-        self.setIcon(QIcon('assets/arrows.png'))
+        self.setIcon(QIcon('_internal/assets/arrows.png'))
         self.setFixedWidth(25)
         self.setFixedHeight(25)
         self.setStyleSheet(

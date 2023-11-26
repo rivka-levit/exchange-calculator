@@ -20,7 +20,7 @@ class ListWindow(QWidget):
         self.set_ui()
 
     def set_ui(self):
-        self.setWindowIcon(QIcon('assets/icon.ico'))
+        self.setWindowIcon(QIcon('_internal/assets/icon.ico'))
         self.setWindowTitle('Currencies')
         self.setGeometry(0, 0, 400, 500)
         self.setStyleSheet('background-color: #f2f2f2;')

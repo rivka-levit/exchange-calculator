@@ -9,7 +9,9 @@ class CustomFonts:
     """Custom fonts for the application."""
 
     def __init__(self):
-        self.gentium_bold = self.add_font('assets/gentium-book-basic.bold.ttf')
+        self.gentium_bold = self.add_font(
+            '_internal/assets/gentium-book-basic.bold.ttf'
+        )
 
     @staticmethod
     def add_font(filename):

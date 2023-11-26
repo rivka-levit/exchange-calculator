@@ -22,7 +22,7 @@ class InvalidInputMessage(BaseMessage):
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.setWindowIcon(QIcon('assets/icon.ico'))
+        self.setWindowIcon(QIcon('_internal/assets/icon.ico'))
         self.setWindowTitle("Invalid input!")
         self.setText("The amount should be a number!")
         self.setIcon(QMessageBox.Icon.Warning)
@@ -33,7 +33,7 @@ class ConnectionErrorMessage(BaseMessage):
 
     def __init__(self, msg, parent=None):
         super().__init__(parent=parent)
-        self.setWindowIcon(QIcon('assets/icon.ico'))
+        self.setWindowIcon(QIcon('_internal/assets/icon.ico'))
         self.setWindowTitle("Connection Error!")
         self.setText(f'Oops! {msg}')
         self.setIcon(QMessageBox.Icon.Critical)
