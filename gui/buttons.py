@@ -56,8 +56,9 @@ class ListButton(QPushButton):
 
     def set_ui(self):
         """Set user interface."""
+
         self.setIcon(QIcon('assets/list.png'))
-        self.setMinimumWidth(35)
+        self.setFixedWidth(35)
         self.setFixedHeight(35)
         self.setStyleSheet(
             """
@@ -75,6 +76,40 @@ class ListButton(QPushButton):
         )
 
         effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 2)),
+                                           blurRadius=5,
+                                           color=QColor('#545f72'))
+        self.setGraphicsEffect(effect)
+
+
+class ReverseButton(QPushButton):
+    """Reverse currencies in ComboBoxes."""
+
+    def __init__(self):
+        super().__init__()
+        self.set_ui()
+
+    def set_ui(self):
+        """Set user interface."""
+
+        self.setIcon(QIcon('assets/arrows.png'))
+        self.setFixedWidth(25)
+        self.setFixedHeight(25)
+        self.setStyleSheet(
+            """
+                QPushButton {
+                    background-color: #d7d5d4;
+                    border-radius: 4px;
+                }
+                QPushButton:hover {
+                    background-color: #c8c3c0;
+                }
+                QPushButton:pressed {
+                    background-color: #c0b7b4;
+                }
+            """
+        )
+
+        effect = QGraphicsDropShadowEffect(offset=QPointF(QPoint(1, 1)),
                                            blurRadius=5,
                                            color=QColor('#545f72'))
         self.setGraphicsEffect(effect)

@@ -3,14 +3,13 @@ Main window of the app.
 """
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon, QPixmap, QCloseEvent
+from PyQt6.QtGui import QIcon, QCloseEvent
 from PyQt6.QtWidgets import (
     QApplication,
     QMainWindow,
     QWidget,
     QVBoxLayout,
-    QHBoxLayout,
-    QLabel
+    QHBoxLayout
 )
 from requests.exceptions import ConnectionError
 
@@ -19,7 +18,7 @@ from calculs.extractors import RateExtractor
 from gui.choice_boxes import ChoiceBox
 from gui.input_field import AmountInput
 from gui.output_label import ConvertedAmount
-from gui.buttons import ConvertButton, ListButton
+from gui.buttons import ConvertButton, ListButton, ReverseButton
 from gui.fonts import CustomFonts
 from gui.messages import InvalidInputMessage, ConnectionErrorMessage
 from gui.list_window import ListWindow
@@ -77,15 +76,14 @@ class MainWindow(QMainWindow):
         """Set nested layout with boxes to select currencies."""
 
         choice_layout = QHBoxLayout()
-        choice_layout.setSpacing(10)
+        choice_layout.setSpacing(15)
 
         self.from_box.setCurrentText('USD')
         choice_layout.addWidget(self.from_box, stretch=2)
 
-        img_label = QLabel()
-        pixmap = QPixmap('assets/arrow.png')
-        img_label.setPixmap(pixmap)
-        choice_layout.addWidget(img_label, stretch=1)
+        reverse_btn = ReverseButton()
+        choice_layout.addWidget(reverse_btn, stretch=1)
+        reverse_btn.clicked.connect(self.reverse_currencies)
 
         self.to_box.setCurrentText('ILS')
         choice_layout.addWidget(self.to_box, stretch=2)
@@ -135,6 +133,14 @@ class MainWindow(QMainWindow):
         else:
             warning = InvalidInputMessage(parent=self)
             warning.exec()
+
+    def reverse_currencies(self):
+        """Exchange currencies names in boxes."""
+
+        from_cur = self.from_box.currentText()
+        to_cur = self.to_box.currentText()
+        self.to_box.setCurrentText(from_cur)
+        self.from_box.setCurrentText(to_cur)
 
     def show_currencies(self):
         """Show additional window with list of currencies."""
